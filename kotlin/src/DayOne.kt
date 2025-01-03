@@ -1,5 +1,6 @@
 import java.io.BufferedReader
 import java.nio.file.Path
+import java.util.*
 import java.util.regex.Pattern
 import kotlin.io.path.isReadable
 import kotlin.io.path.reader
@@ -50,7 +51,19 @@ fun getTotalDistance(leftList: List<Int>, rightList: List<Int>): Int {
     return totalDistance
 }
 
-fun main() {
+fun getSimilarityScore(): Int {
+    var score = 0
+    val content = getFileContent("kotlin", "resources", "dayone", "data.txt")
+    for (item in content.first) {
+        score += item * Collections.frequency(content.second, item)
+    }
+    return score
+}
+
+fun runDayOne() {
+    println("------------ Day 1 ------------")
     val content = getFileContent("kotlin", "resources", "dayone", "data.txt")
     println(getTotalDistance(content.first, content.second))
+    println(getSimilarityScore())
+    println("------------ Day 1 ------------")
 }
